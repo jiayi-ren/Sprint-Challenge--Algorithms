@@ -97,7 +97,81 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        # bubble sort(modified)
+        # move right until the end of list
+        # compare item, hold the largest until the end of list n
+        # move left until the start of list
+        # compare item, hold the smallest until 0
+        # repeat the process
+
+        # determine total length of list
+        length = 1
+        # pick up item at index 0
+        self.swap_item()
+        # move right until the end of list
+        # calculate the total length of list
+        # move the largest to the end of list
+        while self.can_move_right():
+            # if item is less than position item, swap
+            if self.compare_item() == -1:
+                self.swap_item()
+            # length + 1
+            length += 1
+            # move right
+            self.move_right()
+        # at last item of list
+        # if item is larger than last position item, swap
+        if self.compare_item() == 1 or self.compare_item() == 0:
+            self.swap_item()
+        # length == total length of list
+        # assign a end index
+        end = length - 1
+        # assign a start index
+        # start index is at None item position
+        start = 0
+        # robot move between start and end
+        # robot at end index now
+        # robot move left to start index
+        while start < end:
+            # move to the start index
+            # if encounter None, break loop
+            while self.can_move_left():
+                self.move_left()
+                if self.compare_item() == 1:
+                    self.swap_item()
+                if self.compare_item() == None:
+                    self.swap_item()
+                    break
+            # start index + 1
+            start += 1
+            # if start and end next to each other,
+            # break out of the loop
+            if (end-start) == 1:
+                break
+            # robot move right
+            # position at start index
+            self.move_right()
+            # swap None with position item
+            # None at start index
+            self.swap_item()
+            # move robot to end index
+            # compare and hold largest until the end
+            for i in range(end-start-1):
+                self.move_right()
+                if self.compare_item() == -1:
+                    self.swap_item()
+            # at end index - 1 position
+            # if item is larger than last position item, swap
+            if self.compare_item() == 1 or self.compare_item() == 0:
+                self.swap_item()
+            # end index - 1
+            end -= 1
+        # if length of index is even
+        # last position is at right of mid point of list
+        # need to swap item with None
+        if length%2 == 0:
+            self.swap_item()
+        
 
 
 if __name__ == "__main__":
